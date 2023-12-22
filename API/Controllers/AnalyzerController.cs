@@ -14,7 +14,7 @@ public class AnalyzeController: ControllerBase
         if (value == null)
             return StatusCode((int)HttpStatusCode.BadRequest, "Invalid expression");
         
-        var valueInt = value.Value.intValue;
+        var valueInt = value.intValue;
         var responseMessage = "The result of the expression is: " + valueInt;
         
         return Ok(responseMessage);

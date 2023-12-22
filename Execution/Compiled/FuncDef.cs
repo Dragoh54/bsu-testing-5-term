@@ -19,6 +19,7 @@ public class FuncDef
     }
     public string? Name  {  set;  get;  }
     public int ParamCount { set; get; }
+    public int LocalVarCount { get => localVariables.Count - ParamCount; }
 
     public VariableDef? AddLocalVariable(string name, bool isParameter = false)
     {
@@ -34,13 +35,15 @@ public class FuncDef
     {
         return AddLocalVariable(name, isParameter: true);
     }
-    public void SetStackIndexForLocalVars() // call this after full function parsing
+    public void SetStackIndexForLocalVars() // call this after full function header parsing
     {
+        //var varCount = localVariables.Count - ParamCount;
         foreach (var l in localVariables.Values.Cast<LocalVariableDef>())
         {
-            l.stackIndex = localVariables.Count - l.index;
             if (l.isParameter)
-                ++l.stackIndex;
+                l.stackIndex = ParamCount - l.index + 1;
+            else
+                l.stackIndex = ParamCount - l.index - 1; // retAddr and bp pushed before local vars
         }
     }
 
