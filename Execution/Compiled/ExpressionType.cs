@@ -19,12 +19,12 @@ public enum ExpressionType
 //    [FieldOffset(4)] public float fubar;
 //}
 
-public struct TypedValue
+public class TypedValue
 {
-    public int intValue = 0;
-    public double doubleValue = 0;
+    public int intValue;// = 0;
+    public double doubleValue;// = 0;
     public string? stringValue;
-    public bool boolValue = false;
+    public bool boolValue;// = false;
 
     public ExpressionType type = ExpressionType.Undefined;
 
@@ -35,6 +35,11 @@ public struct TypedValue
 
     public TypedValue(TypedValue source)
     {
+        this.SetFrom(source);
+    }
+
+    public void SetFrom(TypedValue source)
+    {
         this.type = source.type;
         this.intValue = source.intValue;
         this.doubleValue = source.doubleValue;
@@ -42,28 +47,28 @@ public struct TypedValue
         this.boolValue = source.boolValue;
     }
 
-    public void SetValue(int value)
+    public TypedValue(int value)
     {
-        intValue = value;
-        type = ExpressionType.Int;
+        this.intValue = value;
+        this.type = ExpressionType.Int;
     }
-    public void SetValue(double value)
+    public TypedValue(double value)
     {
-        doubleValue = value;
-        type = ExpressionType.Double;
+        this.doubleValue = value;
+        this.type = ExpressionType.Double;
     }
-    public void SetValue(string value)
+    public TypedValue(string value)
     {
-        stringValue = value;
-        type = ExpressionType.Str;
+        this.stringValue = value;
+        this.type = ExpressionType.Str;
     }
-    public void SetValue(bool value)
+    public TypedValue(bool value)
     {
-        boolValue = value;
-        type = ExpressionType.Bool;
+        this.boolValue = value;
+        this.type = ExpressionType.Bool;
     }
 
-    //public void CopyFrom(TypedValue source) // no!!! use 'constructor' TypedValue(TypedValue source)
+    //public void CopyFrom(TypedValue source) // not for struct!!! use 'constructor' TypedValue(TypedValue source)
     //{
     //    this.type = source.type;
     //    this.intValue = source.intValue;
