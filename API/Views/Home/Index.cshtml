@@ -4,12 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Execution App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #executionForm {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h1>Text Execution App</h1>
     <form id="executionForm">
         <label for="inputText">Введите текст:</label>
-        <input type="text" id="inputText" name="inputText" required>
+    <textarea type="text" id="inputText" name="inputText" required>
+    </textarea>
         <button type="button" onclick="executeText()">Выполнить</button>
     </form>
     <div id="result"></div>
@@ -18,8 +62,8 @@
         function executeText() {
             const inputText = document.getElementById("inputText").value;
             const json = {
-               "analyzeCode": inputText,
-            }
+                "analyzeCode": inputText,
+            };
 
             fetch('/Analyze', {
                 method: 'POST',
