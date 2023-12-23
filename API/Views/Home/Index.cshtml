@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Execution App</title>
+</head>
+<body>
+    <h1>Text Execution App</h1>
+    <form id="executionForm">
+        <label for="inputText">Введите текст:</label>
+        <input type="text" id="inputText" name="inputText" required>
+        <button type="button" onclick="executeText()">Выполнить</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        function executeText() {
+            const inputText = document.getElementById("inputText").value;
+            const json = {
+               "analyzeCode": inputText,
+            }
+
+            fetch('/Analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(json),
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("result").innerText = data;
+            });
+        }
+    </script>
+</body>
+</html>

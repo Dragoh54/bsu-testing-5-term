@@ -15,4 +15,9 @@
       <ProjectReference Include="..\Execution\Execution.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Views\Shared\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Shared\_ProductSummary.cshtml" />
+    </ItemGroup>
+
 </Project>
